@@ -1,19 +1,18 @@
-﻿namespace InvestLab.Business.Services
+﻿using InvestLab.Models.BaseObjects;
+
+namespace InvestLab.Business.Services
 {
-    public class IpcaService
+    public class IpcaService: Interest
     {
-        public decimal IpcaValue { get; set; }
-        public decimal GetIpca()
+        public override decimal InterestValue { get; set; }
+        public IpcaService(decimal interestRate)
         {
-            if (IpcaValue == 0)
-            {
-                IpcaValue = 5.06m;
-                return 0;
-            }
-            else
-            {
-                return IpcaValue;
-            }
+            InterestValue = GetIpca() + interestRate;
+        }
+        private decimal GetIpca()
+        {
+            // TODO: Implementar lógica de busca do IPCA por webservice
+            return 5.06m;
         }
     }
 }

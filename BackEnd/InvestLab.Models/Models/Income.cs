@@ -5,5 +5,6 @@
         public decimal GrossProfrit { get; set; }
         public decimal NetProfit { get; set; }
         public decimal IncomeTax { get; set; }
+
     }
 }

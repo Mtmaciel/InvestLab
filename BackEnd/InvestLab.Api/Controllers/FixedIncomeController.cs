@@ -1,4 +1,7 @@
-﻿using InvestLab.Models.Models;
+﻿using InvestLab.Business;
+using InvestLab.Business.Factories;
+using InvestLab.Models.Interfaces;
+using InvestLab.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvestLab.Api.Controllers
@@ -13,13 +16,15 @@ namespace InvestLab.Api.Controllers
         [HttpPost]
         public ActionResult Simulate(Investiment investiment)
         {
-            decimal valorFinal = investiment.InitialBudget * (1m + 0.011875m);
+            
+            IInterest interest = InterestFactory.CreateInterest(investiment);
 
-            for (int i = 0; i < 24; i++)
-            {
-                valorFinal = (valorFinal + 250) * (1m + 0.011875m);
-            }
-            return Ok();
+            var fixedIncome = new FixedIncome(investiment, interest);
+
+            var financialIncome = fixedIncome.FinancialCalculate();
+            var manualIncome = fixedIncome.ManualCalculate();
+
+            return Ok(new { financialIncome, manualIncome });
         }
     }
 }

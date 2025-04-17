@@ -1,19 +1,20 @@
-﻿namespace InvestLab.Business.Services
+﻿using InvestLab.Models.BaseObjects;
+
+namespace InvestLab.Business.Services
 {
-    public class SelicService
+    public class SelicService : Interest
     {
-        public decimal SelicValue { get; set; }
-        public decimal GetSelic()
+        public override decimal InterestValue { get; set; }
+
+        public SelicService(decimal interestRate)
         {
-            if (SelicValue == 0)
-            {
-                SelicValue = 14.25m;
-                return SelicValue;
-            }
-            else
-            {
-                return SelicValue;
-            }
+            InterestValue = GetSelic()*(interestRate/100);
         }
+
+        private decimal GetSelic()
+        {
+            return 14.25m;
+        }
+
     }
 }

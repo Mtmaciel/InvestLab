@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InvestLab.Business\InvestLab.Business.csproj" />
     <ProjectReference Include="..\InvestLab.Models\InvestLab.Models.csproj" />
   </ItemGroup>
 
